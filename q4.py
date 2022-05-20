@@ -27,3 +27,8 @@ for i in num:
 ###For degree  4 , Potential is : 1.7620541789046658
 #For degree  5 , Potential is : 1.7628552954010728
 #For degree  6 , Potential is : 1.762730048499759
+
+#Gaussian Quadrature method provides 2N-1 accuarcy with N points(roots).
+#For degree 4 to degree 6 , Gaussian quadrature gives the same integration value for first 3 decimal places.
+#As we increase the degree we approach towards more precise integration value.
+
