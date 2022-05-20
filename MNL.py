@@ -2,7 +2,6 @@ import numpy as np
 import sys
 import math
 import copy
-from scipy.special.orthogonal import p_roots
 import random
 
 
@@ -590,7 +589,7 @@ def random_walk(N, Xo, m, a, rNums):
         x.append(dx)
         y.append(dy)
     r.append(R)
-    return x, y, r
+    return r,x,y
 
 #Defining the function for chebyshev fit
 def fitw_cheby(xvals, yvals, degree):

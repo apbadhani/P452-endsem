@@ -9,31 +9,31 @@ def sol_explicit(u, t_steps, alpha):
 x = np.linspace(0, 2, 21)
 #-----time steps--------#
 t = np.linspace(0, 40, 5001)
-#----Alpha factor------#
-alpha = 0.4
+#----Alpha factor------#--- a = dt/dx**2
+a = 0.08
 u = np.zeros((5001, 21))
 #------Initial condiitons------#
 u[0, :] = 20*np.abs(np.sin(np.pi*x))
 #-----Solving the equation---#
-u = sol_explicit(u, 5000, alpha)
+u = sol_explicit(u, 5000, a)
 #--------Plotting------#
 #--time = 0----------#
-plt.plot(x, u[0, :])
+plt.plot(x, u[0, :],color='orange')
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 #--time = 10----------#
-plt.plot(x, u[10, :])
+plt.plot(x, u[10, :],color="red")
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 #--time = 20----------#
-plt.plot(x, u[20, :])
+plt.plot(x, u[20, :],color="yellow")
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 #--time = 50----------#
-plt.plot(x, u[50, :])
+plt.plot(x, u[50, :],color="green")
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
@@ -43,17 +43,20 @@ plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 #--time = 200----------#
-plt.plot(x, u[200, :])
+plt.plot(x, u[200, :],color="brown")
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 #--time = 500----------#
-plt.plot(x, u[500, :])
+plt.plot(x, u[500, :],color="magenta")
 plt.xlabel('X')
 plt.ylabel('Temperature')
 plt.show()
 
-
-#From the figures we can see that the temperature at the midpoint starts rising and attains a maxima.
-#As the boundary condition says that the temperature should be 0 at boundaries.
-#Most of the heat flows in the middle because of boundary conditions
+#By analyzing the plots and comparing it with our initial abs(sin(pi*x)) plot
+#and how with time the tip changes into a plataeu.
+#We can conclude that the temperature at the midpoint starts rising and is
+#attaining a maxima starting from a minima. It can also be infered if we look
+#at our boundary condition which says that the temperature should be 0 at boundaries.
+#So it automatically implies that somewhere in between should exist
+#some kind of maxima, most of the heat flows in the middle.
