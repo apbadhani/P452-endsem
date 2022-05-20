@@ -1,5 +1,13 @@
 from MNL import *
 import math
+#---------- Gauss Quadrature function------#
+def gaus_lege(f,n):
+    s = 0
+    #For weights and zeros
+    zero, wei = leg_zero_wei(n)
+    for i in range(n):
+        s += wei[i-1] * f(zero[i-1])
+    return s
 #--------Defining potential function---------#
 def pote(x):
     return 1.0/math.sqrt(1+x**2)
@@ -13,17 +21,11 @@ def leg_zero_wei(deg):
     elif deg == 6:
         return [0.932469514, 0.661209386, 0.238619186, -0.238619186, -0.661209386, -0.932469514],[0.171324492, 0.360761573, 0.467913934, 0.467913934, 0.360761573, 0.171324492]
 
-#---------- Gauss Quadrature function------#
-def gaus_lege(f,n):
-    s = 0
-    #For weights and zeros
-    zero, wei = leg_zero_wei(n)
-    for i in range(n):
-        s += wei[i-1] * f(zero[i-1])
-    return s
-num = [4,5,6]
-for i in num:
-    print("For degree ",i,", Potential is :",gaus_lege(pote,i))
+#---------------Printing for degree = 4,5,6--------------#
+
+print("For degree 4, Potential is :",gaus_lege(pote,4))
+print("For degree 5, Potential is :",gaus_lege(pote,5))
+print("For degree 6, Potential is :",gaus_lege(pote,6))
 
 #-----------Results----------#
 #For degree  4 , Potential is : 1.7620541789046658
