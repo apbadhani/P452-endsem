@@ -1,31 +1,59 @@
 import numpy as np
 import matplotlib.pyplot as plt
-h = 0.1
-k = 0.008
-x = np.arange(0,2+h,h).round(3)
-t = np.arange(0,4+k,k).round(3)
-#----Boundary Condition-----#
-boundary = [0,0]
-#----Initial condition------#
-initial = 20*np.sin(np.pi*x)
-n = len(x)
-m = len(t)
-T = np.zeros((n,m))
-T[0,:] = boundary[0]
-T[-1,:] = boundary[1]
-T[:,0] = initial
-print(T.round(3))
-fac = k/h**2
-for j in range(1,m):
-    for i in range(1,n-1):
-        T[i,j] = fac*T[i-1,j-1] + (1-2*fac)*T[i,j-1] + fac*T[i+1,j-1]
-T = T.round(3)
-plt.plot(T)
-m = [0,10,20,50,100,200,500]
-plt.legend(m)
-plt.xlabel("Index number")
-plt.ylabel("Temperature")
+#-----Defining heat equation solver---------#
+def sol_explicit(u, t_steps, alpha):
+    for i in range(t_steps-1):
+        u[i+1, 1:-1] = u[i, 1:-1]+alpha*(u[i, 0:-2]-2*u[i, 1:-1]+u[i, 2:])
+    return u
+#----X distance-------#
+x = np.linspace(0, 2, 21)
+#-----time steps--------#
+t = np.linspace(0, 40, 5001)
+#----Alpha factor------#
+alpha = 0.4
+u = np.zeros((5001, 21))
+#------Initial condiitons------#
+u[0, :] = 20*np.abs(np.sin(np.pi*x))
+#-----Solving the equation---#
+u = sol_explicit(u, 5000, alpha)
+#--------Plotting------#
+#--time = 0----------#
+plt.plot(x, u[0, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 10----------#
+plt.plot(x, u[10, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 20----------#
+plt.plot(x, u[20, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 50----------#
+plt.plot(x, u[50, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 100----------#
+plt.plot(x, u[100, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 200----------#
+plt.plot(x, u[200, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
+#--time = 500----------#
+plt.plot(x, u[500, :])
+plt.xlabel('X')
+plt.ylabel('Temperature')
+plt.show()
 
 
-#The curvature of the plot depends on the accuracy/precision of the factor.
-#If we increase the time step size, the maxima of the curve starts decreasing.
+#From the figures we can see that the temperature at the midpoint starts rising and attains a maxima.
+#As the boundary condition says that the temperature should be 0 at boundaries.
+#Most of the heat flows in the middle because of boundary conditions

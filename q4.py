@@ -16,9 +16,9 @@ def leg_zero_wei(deg):
 def gaus_lege(f,n):
     s = 0
     #For weights and zeros
-    (r, w) = leg_zero_wei(n)
+    zero, wei = leg_zero_wei(n)
     for i in range(n):
-        s += w[i-1] * f(r[i-1])
+        s += wei[i-1] * f(zero[i-1])
     return s
 num = [4,5,6]
 for i in num:
